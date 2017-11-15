@@ -1,10 +1,17 @@
+
+
 # 1) get the vocab file from TODO-URL
-wget http://bionlp-www.utu.fi/.jmnybl/finnish_vocab.txt.gz
+#wget http://bionlp-www.utu.fi/.jmnybl/finnish_vocab.txt.gz
 
-# 2) 
-zcat finnish_vocab.txt.gz | perl -pe 's/^\s+//' | cut -f 2 -d ' ' | head -n 5000000 | hfst-optimized-lookup ../fin/src/analyser-gt-norm.hfstol > finnish_vocab_analyzed.5M.txt
+# 2) Note you need giellatekno transducer for Finnish to run the next command http://giellatekno.uit.no/
+# 
+# zcat finnish_vocab.txt.gz | perl -pe 's/^\s+//' | cut -f 2 -d ' ' | head -n 10000000 | hfst-optimized-lookup ../fin/src/analyser-gt-norm.hfstol > finnish_vocab_analyzed.10M.txt
+# 
 
-# 2)
+
+cat finnish_vocab_analyzed.10M.txt | python3 filter.py --max 750000 extension/dict-purelist/fi_FI
+
+# 3)
 cd extension
 ## List files
 rm -f fi-dictionary-lst.xpi
