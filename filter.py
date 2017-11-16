@@ -22,6 +22,8 @@ for line in sys.stdin:
         continue
     if wrd[0]!=analysis[0] and wrd[0].lower()==analysis[0]: #capitalized version of lowercased lemmas
         wrd=wrd.lower()
+    if wrd in words_s: #already done
+        continue
     if word_re.match(wrd): #is word
         words_s.add(wrd)
         words_l.append(wrd)
